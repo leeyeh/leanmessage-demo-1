@@ -2,7 +2,7 @@
   ng-class="{ 'under-mask': !conversation.isMenuOpen } "
   md-component-id="menu"
   md-is-open="conversation.isMenuOpen"
-  md-is-locked-open="$mdMedia('gt-sm')">
+  md-is-locked-open="$mdMedia('gt-sm') || !currentConversation">
   <div flex layout="column" style="overflow:auto;">
     <div class='logo'>LeanMessage</div>
     <md-list flex>
@@ -86,4 +86,13 @@
 
 <!-- Nested Views for conversations.message -->
 <div layout flex ui-view>
+</div>
+
+<!-- NetWorkErrorMask -->
+<div class="network-error" layout="column" layout-align="center center" ng-if="networkError">
+  <md-icon>{{ networkErrorIcon }}</md-icon>
+  <div>
+    {{ networkError }}
+    <md-button ng-click="retry()" ng-if="networkShowRetry">立即重试</md-button>
+  </div>
 </div>
